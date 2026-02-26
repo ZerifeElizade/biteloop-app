@@ -1,23 +1,75 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BiteLoop Təqdimatı</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f7fa; color: #333; text-align: center; }
-    h1 { color: #0066cc; }
-    .box { max-width: 700px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    button { background: #28a745; color: white; border: none; padding: 12px 30px; font-size: 18px; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #218838; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteLoop Prototip</title>
+    <style>
+        /* CSS BURA DAXİLDİR */
+        body { font-family: sans-serif; background: #f0f4f7; display: flex; justify-content: center; padding: 20px; }
+        .app-container { background: white; width: 350px; border-radius: 30px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 8px solid #333; }
+        .header { text-align: center; color: #2e7d32; }
+        .status-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; }
+        .main-btn { background: #ff5722; color: white; border: none; width: 100%; padding: 15px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        .btn-group { display: flex; gap: 10px; margin: 15px 0; }
+        .btn { flex: 1; padding: 10px; border: none; border-radius: 10px; background: #f1f1f1; font-size: 12px; cursor: pointer; }
+        #custom-alert { display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #2e7d32; color: white; padding: 15px 25px; border-radius: 50px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    </style>
 </head>
 <body>
-  <div class="box">
-    <h1>BiteLoop Layihəsi</h1>
-    <p>Salam! Bu mənim ilk canlı saytım. Burada layihə haqqında qısa məlumat olacaq.</p>
-    <p>Tezliklə daha çox məzmun əlavə edəcəyəm 🚀</p>
-    <button>Başla</button>
-  </div>
+
+<div id="custom-alert"><p id="alert-text" style="margin:0;"></p></div>
+
+<div class="app-container">
+    <div class="header">
+        <h1>BiteLoop</h1>
+        <p>Restoran İdarəetmə Paneli</p>
+        <span class="status-badge">Sistem Statusu: Aktiv</span>
+    </div>
+
+    <h3 style="text-align:center; margin-top:30px;">Yeni Artıq Qida Bəyan Et</h3>
+    
+    <div class="btn-group">
+        <button class="btn" onclick="selectType(this)">İnsan üçün</button>
+        <button class="btn" onclick="selectType(this)">Heyvan üçün</button>
+        <button class="btn" onclick="selectType(this)">Gübrə üçün</button>
+    </div>
+
+    <button class="main-btn" onclick="orderKuryer()">ARTIQ QİDA DÜYMƏSİ</button>
+
+    <div style="margin-top:30px; border-top: 1px solid #eee; padding-top:20px; display:flex; justify-content:space-around; text-align:center;">
+        <div><strong>15 kg</strong><br><small>Xilas edilib</small></div>
+        <div><strong>5</strong><br><small>Çatdırılma</small></div>
+    </div>
+</div>
+
+<script>
+    const alertBox = document.getElementById('custom-alert');
+    const alertText = document.getElementById('alert-text');
+
+    function showMsg(msg) {
+        alertText.innerText = msg;
+        alertBox.style.display = "block";
+        setTimeout(() => { alertBox.style.display = "none"; }, 3000);
+    }
+
+    function selectType(btn) {
+        document.querySelectorAll('.btn').forEach(b => {
+            b.style.background = "#f1f1f1";
+            b.style.color = "#333";
+        });
+        btn.style.background = "#4caf50";
+        btn.style.color = "white";
+        showMsg(btn.innerText + " seçildi!");
+    }
+
+    function orderKuryer() {
+        showMsg("Sifariş qəbul edildi! Kuryer yoldadır.");
+        const mainBtn = document.querySelector('.main-btn');
+        mainBtn.innerText = "KURYER YOLDADIR...";
+        mainBtn.style.background = "#2e7d32";
+    }
+</script>
+
 </body>
 </html>
